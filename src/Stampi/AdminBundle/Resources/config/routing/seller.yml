@@ -1,0 +1,30 @@
+seller:
+    path:     /
+    defaults: { _controller: "StampiAdminBundle:Seller:index" }
+
+seller_show:
+    path:     /{id}/show
+    defaults: { _controller: "StampiAdminBundle:Seller:show" }
+
+seller_new:
+    path:     /new
+    defaults: { _controller: "StampiAdminBundle:Seller:new" }
+
+seller_create:
+    path:     /create
+    defaults: { _controller: "StampiAdminBundle:Seller:create" }
+    requirements: { _method: post }
+
+seller_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StampiAdminBundle:Seller:edit" }
+
+seller_update:
+    path:     /{id}/update
+    defaults: { _controller: "StampiAdminBundle:Seller:update" }
+    requirements: { _method: post|put }
+
+seller_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StampiAdminBundle:Seller:delete" }
+    requirements: { _method: post|delete }

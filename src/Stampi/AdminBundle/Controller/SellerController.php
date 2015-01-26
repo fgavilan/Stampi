@@ -4,16 +4,13 @@ namespace Stampi\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 use Stampi\AdminBundle\Entity\Seller;
 use Stampi\AdminBundle\Form\SellerType;
 
 /**
  * Seller controller.
  *
- * @Route("/seller")
  */
 class SellerController extends Controller
 {
@@ -21,9 +18,6 @@ class SellerController extends Controller
     /**
      * Lists all Seller entities.
      *
-     * @Route("/", name="seller")
-     * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -31,16 +25,13 @@ class SellerController extends Controller
 
         $entities = $em->getRepository('StampiAdminBundle:Seller')->findAll();
 
-        return array(
+        return $this->render('StampiAdminBundle:Seller:index.html.twig', array(
             'entities' => $entities,
-        );
+        ));
     }
     /**
      * Creates a new Seller entity.
      *
-     * @Route("/", name="seller_create")
-     * @Method("POST")
-     * @Template("StampiAdminBundle:Seller:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -56,10 +47,10 @@ class SellerController extends Controller
             return $this->redirect($this->generateUrl('seller_show', array('id' => $entity->getId())));
         }
 
-        return array(
+        return $this->render('StampiAdminBundle:Seller:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -84,27 +75,21 @@ class SellerController extends Controller
     /**
      * Displays a form to create a new Seller entity.
      *
-     * @Route("/new", name="seller_new")
-     * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Seller();
         $form   = $this->createCreateForm($entity);
 
-        return array(
+        return $this->render('StampiAdminBundle:Seller:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
      * Finds and displays a Seller entity.
      *
-     * @Route("/{id}", name="seller_show")
-     * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -118,18 +103,15 @@ class SellerController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('StampiAdminBundle:Seller:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * Displays a form to edit an existing Seller entity.
      *
-     * @Route("/{id}/edit", name="seller_edit")
-     * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -144,11 +126,11 @@ class SellerController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('StampiAdminBundle:Seller:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -172,9 +154,6 @@ class SellerController extends Controller
     /**
      * Edits an existing Seller entity.
      *
-     * @Route("/{id}", name="seller_update")
-     * @Method("PUT")
-     * @Template("StampiAdminBundle:Seller:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -196,17 +175,15 @@ class SellerController extends Controller
             return $this->redirect($this->generateUrl('seller_edit', array('id' => $id)));
         }
 
-        return array(
+        return $this->render('StampiAdminBundle:Seller:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
     /**
      * Deletes a Seller entity.
      *
-     * @Route("/{id}", name="seller_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {

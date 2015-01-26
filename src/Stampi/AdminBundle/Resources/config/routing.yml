@@ -1,3 +1,7 @@
+stampi_admin_seller:
+    resource: "@StampiAdminBundle/Resources/config/routing/seller.yml"
+    prefix:   /seller
+
 stampi_admin_homepage:
     path:     /hello/{name}
     defaults: { _controller: StampiAdminBundle:Default:index }
