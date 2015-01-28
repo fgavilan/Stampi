@@ -37,7 +37,7 @@ class Game
 
     /**
      * @ORM\OneToMany(targetEntity="TextI18n", mappedBy="game", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="gamei18n_id", referencedColumnName="id")
      */
     private $gameI18n;
 

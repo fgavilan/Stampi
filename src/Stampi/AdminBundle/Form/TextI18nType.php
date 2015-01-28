@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class GameType extends AbstractType
+class TextI18nType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,16 +15,8 @@ class GameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('publishDate')
-            ->add('imageFolder')
-            ->add('gameI18n', 'collection', array(
-                    'type' => new TextI18nType(),
-                    'allow_add'    => true,
-                    'allow_delete' => true,
-                    'prototype' => true,
-                    'by_reference' => false
-                )
-            )
+            ->add('name')
+            ->add('description')
         ;
     }
     
@@ -34,7 +26,7 @@ class GameType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Stampi\AdminBundle\Entity\Game'
+            'data_class' => 'Stampi\AdminBundle\Entity\TextI18n'
         ));
     }
 
@@ -43,6 +35,6 @@ class GameType extends AbstractType
      */
     public function getName()
     {
-        return 'stampi_adminbundle_game';
+        return 'stampi_adminbundle_texti18n';
     }
 }
