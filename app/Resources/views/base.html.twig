@@ -526,13 +526,12 @@
 
     <!-- begin MAIN PAGE CONTENT -->
     <div id="page-wrapper">
-        {% block body %}{% endblock %}
-    </div>
+
 
     <div class="page-content">
-
+        {% include "breadcrumb.html.twig" %}
     <!-- /.page-content -->
-
+        {% block body %}{% endblock %}
     </div>
     <!-- /#page-wrapper -->
     <!-- end MAIN PAGE CONTENT -->

@@ -1,0 +1,20 @@
+<!-- begin PAGE TITLE ROW -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-title">
+            <h1>{{ page.Title }}</h1>
+            <ol class="breadcrumb">
+                {{ dump(page) }}
+                {% for breadcrumb in page.breadCrumbs %}
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="{{ breadcrumb.url }}">{{ breadcrumb.text }}</a>
+                </li>
+                {% endfor %}
+                <li class="active">{{ page.Title }}</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<!-- end PAGE TITLE ROW -->
