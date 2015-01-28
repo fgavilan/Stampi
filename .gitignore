@@ -10,3 +10,9 @@
 /vendor/
 /bin/
 /composer.phar
+
+#phpstorm files
+.idea/
+
+# phpmig
+bin/phpmig
