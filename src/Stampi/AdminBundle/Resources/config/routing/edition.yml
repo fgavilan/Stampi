@@ -1,0 +1,30 @@
+edition:
+    path:     /
+    defaults: { _controller: "StampiAdminBundle:Edition:index" }
+
+edition_show:
+    path:     /{id}/show
+    defaults: { _controller: "StampiAdminBundle:Edition:show" }
+
+edition_new:
+    path:     /new
+    defaults: { _controller: "StampiAdminBundle:Edition:new" }
+
+edition_create:
+    path:     /create
+    defaults: { _controller: "StampiAdminBundle:Edition:create" }
+    requirements: { _method: post }
+
+edition_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StampiAdminBundle:Edition:edit" }
+
+edition_update:
+    path:     /{id}/update
+    defaults: { _controller: "StampiAdminBundle:Edition:update" }
+    requirements: { _method: post|put }
+
+edition_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StampiAdminBundle:Edition:delete" }
+    requirements: { _method: post|delete }

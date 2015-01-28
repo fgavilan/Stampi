@@ -1,0 +1,30 @@
+game:
+    path:     /
+    defaults: { _controller: "StampiAdminBundle:Game:index" }
+
+game_show:
+    path:     /{id}/show
+    defaults: { _controller: "StampiAdminBundle:Game:show" }
+
+game_new:
+    path:     /new
+    defaults: { _controller: "StampiAdminBundle:Game:new" }
+
+game_create:
+    path:     /create
+    defaults: { _controller: "StampiAdminBundle:Game:create" }
+    requirements: { _method: post }
+
+game_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StampiAdminBundle:Game:edit" }
+
+game_update:
+    path:     /{id}/update
+    defaults: { _controller: "StampiAdminBundle:Game:update" }
+    requirements: { _method: post|put }
+
+game_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StampiAdminBundle:Game:delete" }
+    requirements: { _method: post|delete }

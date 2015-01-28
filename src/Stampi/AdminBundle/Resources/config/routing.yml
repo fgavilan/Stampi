@@ -1,3 +1,23 @@
+stampi_admin_inventory:
+    resource: "@StampiAdminBundle/Resources/config/routing/inventory.yml"
+    prefix:   /inventory
+
+stampi_admin_image:
+    resource: "@StampiAdminBundle/Resources/config/routing/image.yml"
+    prefix:   /image
+
+stampi_admin_item:
+    resource: "@StampiAdminBundle/Resources/config/routing/item.yml"
+    prefix:   /item
+
+stampi_admin_edition:
+    resource: "@StampiAdminBundle/Resources/config/routing/edition.yml"
+    prefix:   /edition
+
+stampi_admin_game:
+    resource: "@StampiAdminBundle/Resources/config/routing/game.yml"
+    prefix:   /game
+
 stampi_admin_seller:
     resource: "@StampiAdminBundle/Resources/config/routing/seller.yml"
     prefix:   /seller
