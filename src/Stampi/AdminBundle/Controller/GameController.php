@@ -2,6 +2,7 @@
 
 namespace Stampi\AdminBundle\Controller;
 
+use Stampi\AdminBundle\Entity\GameI18n;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -36,9 +37,14 @@ class GameController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Game();
+        $data = $request->request->all();
+
+        //$data['game']['publishDate'] = new \DateTime($data['game']['publishDate']);
+        //$data['game']['publishDate'] = date($data['game']['priorTime1']*24 + $data['game']['priorTime2'];
+        //$request->request->replace($data);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        $languages = $this->getDoctrine()->getManager()->getRepository('StampiAdminBundle:Language')->findAll();
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -50,6 +56,7 @@ class GameController extends Controller
         return $this->render('StampiAdminBundle:Game:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'languages'   => $languages,
         ));
     }
 
@@ -79,8 +86,15 @@ class GameController extends Controller
     public function newAction()
     {
         $entity = new Game();
-        $form   = $this->createCreateForm($entity);
         $languages = $this->getDoctrine()->getManager()->getRepository('StampiAdminBundle:Language')->findAll();
+        foreach($languages as $language){
+            $lang=new GameI18n();
+            $lang->addLanguage($language);
+            $entity->addGameI18N($lang);
+        }
+
+        $form   = $this->createCreateForm($entity);
+
         return $this->render('StampiAdminBundle:Game:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),

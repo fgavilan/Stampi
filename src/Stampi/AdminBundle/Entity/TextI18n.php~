@@ -34,6 +34,12 @@ class TextI18n
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Language" , mappedBy="texti18n")
+     * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
+     */
+    private $language;
 
 
     /**

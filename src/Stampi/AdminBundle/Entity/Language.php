@@ -91,4 +91,9 @@ class Language
     {
         return $this->active;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
 }

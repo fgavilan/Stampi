@@ -4,6 +4,9 @@
 {% block extra_javascripts %}<script src="{{ asset('js/plugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>{% endblock %}
 {% block body -%}
 
+
+
+
     <div class="portlet portlet-red">
         <div class="portlet-heading">
             <div class="portlet-title">
@@ -16,7 +19,7 @@
         </div>
         <div class="panel-collapse collapse in" id="formControls">
             <div class="portlet-body">
-                <form action="/app_dev.php/game/create" class="form-horizontal" method="post" name="stampi_adminbundle_game">
+                <form action="{{ url('game_create') }}" class="form-horizontal" method="post" name="game">
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="publishDate">{{ form_label(form.publishDate) }}</label>
                         <div class="col-sm-10">
@@ -31,7 +34,7 @@
                             <div class="portlet-widgets">
                                 <ul class="list-inline tabbed-portlets" id="myTab">
                                     {% for language in languages %}
-                                    <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#tab{{ language.id }}" class="btn btn-xs btn-default">{{ language.name }}</a>
+                                    <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#tab{{ loop.index }}" class="btn btn-xs btn-default">{{ language.name }}</a>
                                     </li>
                                     {% endfor %}
                                 </ul>
@@ -40,35 +43,44 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
+
                         <div class="panel-collapse collapse in" id="purplePortlet">
                             <div class="portlet-body">
                                 <div class="tab-content" id="myTabContent">
-                                    {% for language in languages %}
-                                    <div id="tab{{ language.id }}" class="tab-pane fade {% if loop.first %}active{% endif %} in form-group">
+                                    {% for i18n in form.gameI18n %}
+                                    <div id="tab{{ loop.index }}" class="tab-pane fade {% if loop.first %}active{% endif %} in form-group">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="gamei18n_{{ language.id }}_name">Name</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="gamei18n_{{ language.id }}_name" name="gamei18n[{{ language.id }}][name]" maxlength="45" >
+                                            {{ form_label(i18n.name) }}
+                                            <div class="col-sm-
+                                                10">
+                                                {{ form_widget(i18n.name) }}
+
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="gamei18n_{{ language.id }}_description">Description</label>
-                                            <div class="col-sm-10">
-                                                <textarea placeholder="Placeholder Text" name="gamei18n[{{ language.id }}][description]" id="gamei18n_{{ language.id }}_description" class="form-control perc80"></textarea>
+                                            {{ form_label(i18n.description) }}
+                                            <div class="col-sm-
+                                                10">
+                                                {{ form_widget(i18n.description) }}
+
                                             </div>
                                         </div>
+
+
                                     </div>
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">&nbsp;</label>
                         <div class="col-sm-10">
                             <button class="btn btn-default pull-right" type="submit">Submit</button>
                         </div>
                     </div>
+                {{ form_row(form._token) }}
                 </form>
             </div>
         </div>
@@ -81,4 +93,5 @@
         </a>
     </li>
 </ul>
+
 {% endblock %}

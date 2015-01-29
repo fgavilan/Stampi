@@ -31,22 +31,16 @@ class Game
     /**
      * @var string
      *
-     * @ORM\Column(name="imageFolder", type="string", length=255)
+     * @ORM\Column(name="imageFolder", type="string", length=255, nullable=true)
      */
     private $imageFolder;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextI18n", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="gamei18n_id", referencedColumnName="id")
-     */
-    private $gameI18n;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Edition", mappedBy="game", cascade={"persist","remove"})
+     *
+     * @ORM\OneToMany(targetEntity="GameI18n", mappedBy="game", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
      */
-    private $editions;
-
+    private $gameI18N;
 
     /**
      * Get id
@@ -109,72 +103,39 @@ class Game
     public function __construct()
     {
         $this->gameI18n = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->editions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /**
-     * Add gameI18n
+     * Add gameI18N
      *
-     * @param \Stampi\AdminBundle\Entity\TextI18n $gameI18n
+     * @param \Stampi\AdminBundle\Entity\GameI18n $gameI18N
      * @return Game
      */
-    public function addGameI18n(\Stampi\AdminBundle\Entity\TextI18n $gameI18n)
+    public function addGameI18N(\Stampi\AdminBundle\Entity\GameI18n $gameI18N)
     {
-        $this->gameI18n[] = $gameI18n;
+        $this->gameI18N[] = $gameI18N;
 
         return $this;
     }
 
     /**
-     * Remove gameI18n
+     * Remove gameI18N
      *
-     * @param \Stampi\AdminBundle\Entity\TextI18n $gameI18n
+     * @param \Stampi\AdminBundle\Entity\GameI18n $gameI18N
      */
-    public function removeGameI18n(\Stampi\AdminBundle\Entity\TextI18n $gameI18n)
+    public function removeGameI18N(\Stampi\AdminBundle\Entity\GameI18n $gameI18N)
     {
-        $this->gameI18n->removeElement($gameI18n);
+        $this->gameI18N->removeElement($gameI18N);
     }
 
     /**
-     * Get gameI18n
+     * Get gameI18N
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getGameI18n()
+    public function getGameI18N()
     {
-        return $this->gameI18n;
-    }
-
-    /**
-     * Add editions
-     *
-     * @param \Stampi\AdminBundle\Entity\Edition $editions
-     * @return Game
-     */
-    public function addEdition(\Stampi\AdminBundle\Entity\Edition $editions)
-    {
-        $this->editions[] = $editions;
-
-        return $this;
-    }
-
-    /**
-     * Remove editions
-     *
-     * @param \Stampi\AdminBundle\Entity\Edition $editions
-     */
-    public function removeEdition(\Stampi\AdminBundle\Entity\Edition $editions)
-    {
-        $this->editions->removeElement($editions);
-    }
-
-    /**
-     * Get editions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEditions()
-    {
-        return $this->editions;
+        return $this->gameI18N;
     }
 }

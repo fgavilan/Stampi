@@ -36,17 +36,11 @@ class Game
     private $imageFolder;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextI18n", mappedBy="game", cascade={"persist","remove"})
+     *
+     * @ORM\OneToMany(targetEntity="GameI18n", mappedBy="game", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
      */
-    private $gameI18n;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Edition", mappedBy="game", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
-     */
-    private $editions;
-
+    private $gameI18N;
 
     /**
      * Get id
@@ -102,5 +96,46 @@ class Game
     public function getImageFolder()
     {
         return $this->imageFolder;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->gameI18n = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Add gameI18N
+     *
+     * @param \Stampi\AdminBundle\Entity\GameI18n $gameI18N
+     * @return Game
+     */
+    public function addGameI18N(\Stampi\AdminBundle\Entity\GameI18n $gameI18N)
+    {
+        $this->gameI18N[] = $gameI18N;
+
+        return $this;
+    }
+
+    /**
+     * Remove gameI18N
+     *
+     * @param \Stampi\AdminBundle\Entity\GameI18n $gameI18N
+     */
+    public function removeGameI18N(\Stampi\AdminBundle\Entity\GameI18n $gameI18N)
+    {
+        $this->gameI18N->removeElement($gameI18N);
+    }
+
+    /**
+     * Get gameI18N
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGameI18N()
+    {
+        return $this->gameI18N;
     }
 }

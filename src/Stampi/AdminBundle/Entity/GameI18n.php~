@@ -5,12 +5,12 @@ namespace Stampi\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TextI18n
+ * GameI18n
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Stampi\AdminBundle\Entity\TextI18nRepository")
+ * @ORM\Entity
  */
-class TextI18n
+class GameI18n
 {
     /**
      * @var integer
@@ -34,13 +34,20 @@ class TextI18n
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+
     /**
      *
-     * @ORM\OneToOne(targetEntity="Language" , mappedBy="texti18n")
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="gameI18N")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     */
+    private $game;
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Language")
      * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
      */
-    private $language;
 
+    private $language;
 
     /**
      * Get id
@@ -56,7 +63,7 @@ class TextI18n
      * Set name
      *
      * @param string $name
-     * @return TextI18n
+     * @return GameI18n
      */
     public function setName($name)
     {
@@ -79,7 +86,7 @@ class TextI18n
      * Set description
      *
      * @param string $description
-     * @return TextI18n
+     * @return GameI18n
      */
     public function setDescription($description)
     {
@@ -102,7 +109,7 @@ class TextI18n
      * Set language
      *
      * @param \Stampi\AdminBundle\Entity\Language $language
-     * @return TextI18n
+     * @return GameI18n
      */
     public function setLanguage(\Stampi\AdminBundle\Entity\Language $language = null)
     {
@@ -119,5 +126,58 @@ class TextI18n
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * Set game
+     *
+     * @param \Stampi\AdminBundle\Entity\Game $game
+     * @return GameI18n
+     */
+    public function setGame(\Stampi\AdminBundle\Entity\Game $game = null)
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return \Stampi\AdminBundle\Entity\Game 
+     */
+    public function getGame()
+    {
+        return $this->game;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->language = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add language
+     *
+     * @param \Stampi\AdminBundle\Entity\Language $language
+     * @return GameI18n
+     */
+    public function addLanguage(\Stampi\AdminBundle\Entity\Language $language)
+    {
+        $this->language[] = $language;
+
+        return $this;
+    }
+
+    /**
+     * Remove language
+     *
+     * @param \Stampi\AdminBundle\Entity\Language $language
+     */
+    public function removeLanguage(\Stampi\AdminBundle\Entity\Language $language)
+    {
+        $this->language->removeElement($language);
     }
 }
