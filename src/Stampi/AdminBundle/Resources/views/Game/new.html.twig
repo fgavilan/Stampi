@@ -1,9 +1,78 @@
+{%  set page = {'Title':'New Game','breadCrumbs': {'Home' : {'text':'Home','url':'/'},'Games' : {'text':'Games','url': url('game') } } } %}
 {% extends '::base.html.twig' %}
-
+{% block stylesheets %}<link href="{{ asset('css/plugins/bootstrap-datepicker/datepicker3.css') }}" rel="stylesheet">{% endblock %}
+{% block extra_javascripts %}<script src="{{ asset('js/plugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>{% endblock %}
 {% block body -%}
-    <h1>Game creation</h1>
 
-    {{ form(form) }}
+    <div class="portlet portlet-red">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h4>New Game Data</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a href="basic-form-elements.html#formControls" data-parent="#accordion" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-collapse collapse in" id="formControls">
+            <div class="portlet-body">
+                <form action="/app_dev.php/game/create" class="form-horizontal" method="post" name="stampi_adminbundle_game">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="publishDate">{{ form_label(form.publishDate) }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.publishDate) }}
+                        </div>
+                    </div>
+                    <div class="portlet portlet-purple">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Text / Description</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <ul class="list-inline tabbed-portlets" id="myTab">
+                                    {% for language in languages %}
+                                    <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#tab{{ language.id }}" class="btn btn-xs btn-default">{{ language.name }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <span class="divider"></span>
+                                <a href="portlets.html#purplePortlet" data-parent="#accordion" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-collapse collapse in" id="purplePortlet">
+                            <div class="portlet-body">
+                                <div class="tab-content" id="myTabContent">
+                                    {% for language in languages %}
+                                    <div id="tab{{ language.id }}" class="tab-pane fade {% if loop.first %}active{% endif %} in form-group">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="gamei18n_{{ language.id }}_name">Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="gamei18n_{{ language.id }}_name" name="gamei18n[{{ language.id }}][name]" maxlength="45" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="gamei18n_{{ language.id }}_description">Description</label>
+                                            <div class="col-sm-10">
+                                                <textarea placeholder="Placeholder Text" name="gamei18n[{{ language.id }}][description]" id="gamei18n_{{ language.id }}_description" class="form-control perc80"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">&nbsp;</label>
+                        <div class="col-sm-10">
+                            <button class="btn btn-default pull-right" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
         <ul class="record_actions">
     <li>

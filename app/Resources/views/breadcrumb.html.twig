@@ -4,7 +4,6 @@
         <div class="page-title">
             <h1>{{ page.Title }}</h1>
             <ol class="breadcrumb">
-                {{ dump(page) }}
                 {% for breadcrumb in page.breadCrumbs %}
                 <li>
                     <i class="fa fa-dashboard"></i>  <a href="{{ breadcrumb.url }}">{{ breadcrumb.text }}</a>

@@ -80,10 +80,11 @@ class GameController extends Controller
     {
         $entity = new Game();
         $form   = $this->createCreateForm($entity);
-
+        $languages = $this->getDoctrine()->getManager()->getRepository('StampiAdminBundle:Language')->findAll();
         return $this->render('StampiAdminBundle:Game:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'languages' => $languages,
         ));
     }
 

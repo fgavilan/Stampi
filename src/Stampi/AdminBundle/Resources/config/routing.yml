@@ -25,3 +25,7 @@ stampi_admin_seller:
 stampi_admin_homepage:
     path:     /hello/{name}
     defaults: { _controller: StampiAdminBundle:Default:index }
+
+stampi_admin_index:
+    path:     /
+    defaults: { _controller: StampiAdminBundle:Default:index }

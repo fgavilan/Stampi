@@ -36,7 +36,7 @@ class Game
     private $imageFolder;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextI18n", mappedBy="game", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="TextI18n", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="gamei18n_id", referencedColumnName="id")
      */
     private $gameI18n;

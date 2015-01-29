@@ -23,8 +23,10 @@
         <link href="{{ asset('css/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet">
         <link href="{{ asset('css/plugins/datatables/datatables.css') }}" rel="stylesheet">
 
+
         <!-- THEME STYLES - Include these on every page. -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/mystyles.css') }}" rel="stylesheet">
         <link href="{{ asset('css/plugins.css') }}" rel="stylesheet">
 
         <!-- THEME DEMO STYLES - Use these styles for reference if needed. Otherwise they can be deleted. -->
@@ -528,7 +530,7 @@
     <div id="page-wrapper">
 
 
-    <div class="page-content">
+    <div class="page-content page-content-ease-in">
         {% include "breadcrumb.html.twig" %}
     <!-- /.page-content -->
         {% block body %}{% endblock %}
@@ -584,6 +586,9 @@
     <script src="{{ asset('js/plugins/datatables/datatables-bs3.js') }}"></script>
 
     <!-- THEME SCRIPTS -->
+    <!--my scripts-->
+    <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
+    {% block extra_javascripts %}{% endblock %}
     </body>
 </html>
