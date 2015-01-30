@@ -17,7 +17,11 @@ class GameI18nType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-
+            ->add('language','entity',array(
+                'class' => 'Stampi\AdminBundle\Entity\Language',
+                'attr' => array('class' => 'hidden')
+            )
+            )
         ;
     }
     

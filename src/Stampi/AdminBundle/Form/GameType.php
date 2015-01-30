@@ -24,6 +24,10 @@ class GameType extends AbstractType
             ))
             ->add('gameI18n', 'collection', array(
                     'type' => new GameI18nType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'by_reference' => false
                 )
             )
         ;

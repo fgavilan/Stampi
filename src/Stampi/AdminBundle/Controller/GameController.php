@@ -37,15 +37,15 @@ class GameController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Game();
-        $data = $request->request->all();
 
-        //$data['game']['publishDate'] = new \DateTime($data['game']['publishDate']);
-        //$data['game']['publishDate'] = date($data['game']['priorTime1']*24 + $data['game']['priorTime2'];
-        //$request->request->replace($data);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $languages = $this->getDoctrine()->getManager()->getRepository('StampiAdminBundle:Language')->findAll();
         if ($form->isValid()) {
+            $gameI18n = $entity->getGameI18N();
+            foreach($gameI18n as $translate){
+                $translate->setGame($entity);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -89,7 +89,7 @@ class GameController extends Controller
         $languages = $this->getDoctrine()->getManager()->getRepository('StampiAdminBundle:Language')->findAll();
         foreach($languages as $language){
             $lang=new GameI18n();
-            $lang->addLanguage($language);
+            $lang->setLanguage($language);
             $entity->addGameI18N($lang);
         }
 
