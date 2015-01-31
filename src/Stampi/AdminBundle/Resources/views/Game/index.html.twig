@@ -16,6 +16,7 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Name</th>
                                 <th>Publishdate</th>
                                 <th>Imagefolder</th>
                                 <th>Actions</th>
@@ -25,17 +26,12 @@
                             {% for entity in entities %}
                             <tr>
                                 <td><a href="{{ path('game_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                <td><a href="{{ path('game_show', { 'id': entity.id }) }}">{{ entity.gameI18n.first.name }}</a></td>
                                 <td>{% if entity.publishDate %}{{ entity.publishDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                                 <td>{{ entity.imageFolder }}</td>
                                 <td>
-                                    <ul>
-                                        <li>
-                                            <a href="{{ path('game_show', { 'id': entity.id }) }}">show</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('game_edit', { 'id': entity.id }) }}">edit</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{ path('game_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> </a>
+                                    <a href="{{ path('game_edit', { 'id': entity.id }) }}"><i class="fa fa-edit"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}

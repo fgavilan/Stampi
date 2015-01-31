@@ -1,4 +1,4 @@
-{%  set page = {'Title':'Game' ~ entity.id,'breadCrumbs': {'Home' : {'text':'Home','url':'/'},'Games' : {'text':'Games','url': url('game') } } } %}
+{%  set page = {'Title':'Game : ' ~ entity.gameI18n.first.name,'breadCrumbs': {'Home' : {'text':'Home','url':'/'},'Games' : {'text':'Games','url': url('game') } } } %}
 {% extends '::base.html.twig' %}
 
 {% block body -%}
@@ -10,6 +10,12 @@
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
             </tr>
+            {% for gameI18n in entity.gameI18n %}
+            <tr>
+                <th>{{ gameI18n.language.name }}</th>
+                <td>{{ gameI18n.name }} : {{ gameI18n.description }}</td>
+            </tr>
+            {% endfor %}
             <tr>
                 <th>Publishdate</th>
                 <td>{{ entity.publishDate|date('Y-m-d H:i:s') }}</td>
