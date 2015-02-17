@@ -1,0 +1,7 @@
+#media_image:
+#    resource: "@MediaBundle/Resources/config/routing/image.yml"
+#    prefix:   /image
+
+api_media:
+    type:     rest
+    resource: "@MediaBundle/Controller/ImageRESTController.php"

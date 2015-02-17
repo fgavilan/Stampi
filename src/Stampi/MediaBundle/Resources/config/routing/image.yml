@@ -1,0 +1,30 @@
+image:
+    path:     /
+    defaults: { _controller: "MediaBundle:Image:index" }
+
+image_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediaBundle:Image:show" }
+
+image_new:
+    path:     /new
+    defaults: { _controller: "MediaBundle:Image:new" }
+
+image_create:
+    path:     /create
+    defaults: { _controller: "MediaBundle:Image:create" }
+    requirements: { _method: post }
+
+image_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediaBundle:Image:edit" }
+
+image_update:
+    path:     /{id}/update
+    defaults: { _controller: "MediaBundle:Image:update" }
+    requirements: { _method: post|put }
+
+image_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediaBundle:Image:delete" }
+    requirements: { _method: post|delete }
