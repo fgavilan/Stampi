@@ -11,6 +11,7 @@
 /bin/
 /composer.phar
 
+*.php~
 #phpstorm files
 .idea/
 

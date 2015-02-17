@@ -1,43 +1,54 @@
+{%  set page = {'Title':'Editions','breadCrumbs': {'Home' : {'text':'Home','url':'/'} } } %}
 {% extends '::base.html.twig' %}
 
 {% block body -%}
     <h1>Edition list</h1>
+    <div class="portlet portlet-orange">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h4>Hoverable Responsive Table</h4>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-responsive">
+                <table class="table table-hover records_list">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Publishdate</th>
+                        <th>Imagefolder</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td><a href="{{ path('edition_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                            <td><a href="{{ path('edition_show', { 'id': entity.id }) }}">{{ entity.editionI18n.first.name }}</a></td>
+                            <td>{% if entity.publishDate %}{{ entity.publishDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{{ entity.imageFolder }}</td>
+                            <td>
+                                <a href="{{ path('edition_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> </a>
+                                <a href="{{ path('edition_edit', { 'id': entity.id }) }}"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.portlet -->
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Publishdate</th>
-                <th>Symbol</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('edition_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.publishDate %}{{ entity.publishDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.symbol }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('edition_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('edition_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-        <ul>
+
+    <ul>
         <li>
-            <a href="{{ path('edition_new') }}">
+            <a href="{{ path('game_new') }}">
                 Create a new entry
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}

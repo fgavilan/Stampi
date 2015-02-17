@@ -30,6 +30,14 @@ class GameType extends AbstractType
                     'by_reference' => false
                 )
             )
+            ->add('editions', 'collection', array(
+                    'type' => new EditionType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'by_reference' => false
+                )
+            )
         ;
     }
     

@@ -43,6 +43,13 @@ class Game
     private $gameI18N;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="Edition", mappedBy="game", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     */
+    private $editions;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -137,5 +144,38 @@ class Game
     public function getGameI18N()
     {
         return $this->gameI18N;
+    }
+
+    /**
+     * Add editions
+     *
+     * @param \Stampi\AdminBundle\Entity\Edition $editions
+     * @return Game
+     */
+    public function addEdition(\Stampi\AdminBundle\Entity\Edition $editions)
+    {
+        $this->editions[] = $editions;
+
+        return $this;
+    }
+
+    /**
+     * Remove editions
+     *
+     * @param \Stampi\AdminBundle\Entity\Edition $editions
+     */
+    public function removeEdition(\Stampi\AdminBundle\Entity\Edition $editions)
+    {
+        $this->editions->removeElement($editions);
+    }
+
+    /**
+     * Get editions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEditions()
+    {
+        return $this->editions;
     }
 }
