@@ -1,0 +1,91 @@
+<!-- The blueimp Gallery widget -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+<div class="widget-body">
+    <input type="hidden" id="context" value="{{ galleryData.context }}" />
+    <input type="hidden" id="target_id" value="{{ galleryData.targetId }}" />
+    <!-- The file upload form used as target for the file upload widget -->
+    <div class="bannerContainer Wlback-white span12 no-margin">
+        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+
+            <div id="galleryTableHidden">
+                <div class="span2 margin5 galleryContainer newImage">
+                    {% if galleryData.selectType == "radio" %}
+                        <input type="radio" class="gallerySelected" name="imageSelected">
+                    {% else %}
+                        <input type="checkbox" class="gallerySelected" name="imageSelected">
+                    {% endif %}
+                    {% if galleryData.star == true %}
+                        <input type="radio" class="galleryStarred" name="imageStarred">
+                    {% endif %}
+                    <img class="imgGallery img-polaroid" alt="" src="" onclick="markItem(this)">
+                    <div class="imgButtons" image-id="">
+                        <span><a class="previewGallery" href="" title=""><i class="icon-eye-2"></i></a></span>
+                        <span><i class="icon-trash" gallery-action="{{ url('delete_image',{ 'entity':'PLACEHOLDER' }) }}" gallery-method="DELETE"></i></span>
+                        <span><i class="icon-checkmark" onclick="markItem(this)"></i></span>
+                        {% if galleryData.star == true %}
+                            <span><i class="icon-star-3" onclick="starItem(this)"></i></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        <div id="imageGallery" class="span8">
+            <form id="gallery" action="#" method="POST" enctype="multipart/form-data">
+            <div class="files span12" id="galleryTable">
+            {% for image in gallery %}
+            <div class="span2 margin5 galleryContainer">
+                {% if galleryData.selectType == "radio" %}
+                    <input type="radio" class="gallerySelected" name="imageSelected" id="{{ image.id }}-selected" value="{{ image.id }}" {% if galleryData.imageSelected is defined and galleryData.imageSelected == image.id %} checked{% endif %}>
+                {% else %}
+                    <input type="checkbox" class="gallerySelected" name="imageSelected" id="{{ image.id }}-selected" value="{{ image.id }}" {% if image.checked is defined and image.checked == true %} checked{% endif %}>
+                {% endif %}
+                {% if galleryData.star == true %}
+                    <input type="radio" class="galleryStarred" name="imageStarred" id="{{ image.id }}-starred" value="{{ image.id }}" {% if galleryData.imageSelected is defined and galleryData.imageSelected == image.id %} checked{% endif %}>
+                    <input type="radio" class="galleryStarred" name="imageStarred" id="{{ image.id }}-starred" value="{{ image.id }}" {% if galleryData.imageSelected is defined and galleryData.imageSelected == image.id %} checked{% endif %}>
+                {% endif %}
+                <img class="imgGallery img-polaroid" alt="{{ image.filename }}" src="{{ asset(image.thumb) }}" onclick="markItem(this)">
+                <div class="imgButtons" image-id="{{ image.id }}">
+                    <span><a href="{{ asset(image.path) }}" title="{{ image.filename }}"><i class="icon-eye-2"></i></a></span>
+                    <span><i class="icon-trash" gallery-action="{{ url('delete_image',{ 'entity':image.id }) }}" gallery-method="DELETE"></i></span>
+                    <span><i class="icon-checkmark" onclick="markItem(this)"></i></span>
+                    {% if galleryData.star == true %}
+                    <span><i class="icon-star-3" onclick="starItem(this)"></i></span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+            </form>
+        </div>
+
+
+        <div id="imageUploader" class="controls span4 bannerCanvas no-margin">
+            <form id="upload" action="{{ url('post_image') }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="5000000" />
+                <div class="logoStatus">Status</div>
+                <div class="logoClear" click-target="topBanner"><i class="icon-trash"></i></div>
+                <div class="nomargin-left">
+                    <div input-target="topBanner" id="logoCanvas" ondrop="dropLogo(event)" ondragleave="dragLeave(event)" ondragover="FileDragHover(event)" class="logoCanvas canvasBig span12" title="Haz clic o arrastra aquí la imagen del banner">
+                            <img alt="Haz clic o arrastra aquí la imagen" style="display: inline">
+                    </div>
+                    <input type="file" name="whiteLabelFile" class="span5" value=""  accept="image/jpeg" />
+                </div>
+                <div class="span12">
+                    <button type="button" click-target="topBannerTwo" class="import-button btn btn-grey">
+                        <span>Importar</span>
+                    </button>
+                </div>
+                <div id="logoList" class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
