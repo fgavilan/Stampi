@@ -41,7 +41,6 @@ class TextI18n
      */
     private $language;
 
-
     /**
      * Get id
      *
@@ -96,5 +95,28 @@ class TextI18n
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set language
+     *
+     * @param \Stampi\AdminBundle\Entity\Language $language
+     * @return TextI18n
+     */
+    public function setLanguage(\Stampi\AdminBundle\Entity\Language $language = null)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return \Stampi\AdminBundle\Entity\Language 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }

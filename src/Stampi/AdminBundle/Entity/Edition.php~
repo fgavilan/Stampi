@@ -39,7 +39,7 @@ class Edition
      * @ORM\OneToMany(targetEntity="TextI18n", mappedBy="edition", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="edition_id", referencedColumnName="id")
      */
-    private $editionI18n;
+    private $textI18n;
 
     /**
      * @ORM\OneToMany(targetEntity="Item", mappedBy="edition", cascade={"persist","remove"})
@@ -102,5 +102,79 @@ class Edition
     public function getSymbol()
     {
         return $this->symbol;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->textI18n = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add textI18n
+     *
+     * @param \Stampi\AdminBundle\Entity\TextI18n $textI18n
+     * @return Edition
+     */
+    public function addTextI18n(\Stampi\AdminBundle\Entity\TextI18n $textI18n)
+    {
+        $this->textI18n[] = $textI18n;
+
+        return $this;
+    }
+
+    /**
+     * Remove textI18n
+     *
+     * @param \Stampi\AdminBundle\Entity\TextI18n $textI18n
+     */
+    public function removeTextI18n(\Stampi\AdminBundle\Entity\TextI18n $textI18n)
+    {
+        $this->textI18n->removeElement($textI18n);
+    }
+
+    /**
+     * Get textI18n
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTextI18n()
+    {
+        return $this->textI18n;
+    }
+
+    /**
+     * Add items
+     *
+     * @param \Stampi\AdminBundle\Entity\Item $items
+     * @return Edition
+     */
+    public function addItem(\Stampi\AdminBundle\Entity\Item $items)
+    {
+        $this->items[] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Remove items
+     *
+     * @param \Stampi\AdminBundle\Entity\Item $items
+     */
+    public function removeItem(\Stampi\AdminBundle\Entity\Item $items)
+    {
+        $this->items->removeElement($items);
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

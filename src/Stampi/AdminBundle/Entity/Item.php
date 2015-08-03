@@ -29,16 +29,25 @@ class Item
     private $playset;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextI18n", mappedBy="item", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="item_i18n", referencedColumnName="id")
-     */
-    private $itemI18n;
+     * @ORM\ManyToMany(targetEntity="TextI18n", cascade={"persist","remove"})
+     * @ORM\JoinTable(name="items_texts",
+     *      joinColumns={@ORM\JoinColumn(name="item_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="text_id", referencedColumnName="id", unique=true)}
+     *      )
+     **/
+    private $textI18n;
 
     /**
      * @ORM\ManyToOne(targetEntity="Rarity")
      * @ORM\JoinColumn(name="rarity_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $rarity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Edition", inversedBy="items")
+     * @ORM\JoinColumn(name="edition_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $edition;
 
     /**
      * Get id
@@ -134,5 +143,28 @@ class Item
     public function getRarity()
     {
         return $this->rarity;
+    }
+
+    /**
+     * Set edition
+     *
+     * @param \Stampi\AdminBundle\Entity\Edition $edition
+     * @return Item
+     */
+    public function setEdition(\Stampi\AdminBundle\Entity\Edition $edition = null)
+    {
+        $this->edition = $edition;
+
+        return $this;
+    }
+
+    /**
+     * Get edition
+     *
+     * @return \Stampi\AdminBundle\Entity\Edition 
+     */
+    public function getEdition()
+    {
+        return $this->edition;
     }
 }

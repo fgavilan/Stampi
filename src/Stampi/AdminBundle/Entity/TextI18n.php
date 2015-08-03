@@ -41,7 +41,6 @@ class TextI18n
      */
     private $language;
 
-
     /**
      * Get id
      *

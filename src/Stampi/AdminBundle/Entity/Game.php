@@ -28,12 +28,13 @@ class Game
      */
     private $publishDate;
 
+
     /**
-     * @var string
      *
-     * @ORM\Column(name="imageFolder", type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist","remove"} , mappedBy="game", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="logo_id", referencedColumnName="id")
      */
-    private $imageFolder;
+    private $logoImage;
 
     /**
      *
@@ -83,26 +84,26 @@ class Game
     }
 
     /**
-     * Set imageFolder
+     * Set logoImage
      *
-     * @param string $imageFolder
+     * @param string $logoImage
      * @return Game
      */
-    public function setImageFolder($imageFolder)
+    public function setlogoImage($logoImage)
     {
-        $this->imageFolder = $imageFolder;
+        $this->logoImage = $logoImage;
 
         return $this;
     }
 
     /**
-     * Get imageFolder
+     * Get logoImage
      *
      * @return string 
      */
-    public function getImageFolder()
+    public function getlogoImage()
     {
-        return $this->imageFolder;
+        return $this->logoImage;
     }
     /**
      * Constructor

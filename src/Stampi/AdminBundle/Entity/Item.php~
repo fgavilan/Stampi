@@ -30,7 +30,7 @@ class Item
 
     /**
      * @ORM\OneToMany(targetEntity="TextI18n", mappedBy="item", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="item_i18n", referencedColumnName="id")
+     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     private $itemI18n;
 
@@ -39,6 +39,12 @@ class Item
      * @ORM\JoinColumn(name="rarity_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $rarity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Edition", inversedBy="items")
+     * @ORM\JoinColumn(name="edition_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $edition;
 
     /**
      * Get id
@@ -71,5 +77,68 @@ class Item
     public function getPlayset()
     {
         return $this->playset;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->itemI18n = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add itemI18n
+     *
+     * @param \Stampi\AdminBundle\Entity\TextI18n $itemI18n
+     * @return Item
+     */
+    public function addItemI18n(\Stampi\AdminBundle\Entity\TextI18n $itemI18n)
+    {
+        $this->itemI18n[] = $itemI18n;
+
+        return $this;
+    }
+
+    /**
+     * Remove itemI18n
+     *
+     * @param \Stampi\AdminBundle\Entity\TextI18n $itemI18n
+     */
+    public function removeItemI18n(\Stampi\AdminBundle\Entity\TextI18n $itemI18n)
+    {
+        $this->itemI18n->removeElement($itemI18n);
+    }
+
+    /**
+     * Get itemI18n
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getItemI18n()
+    {
+        return $this->itemI18n;
+    }
+
+    /**
+     * Set rarity
+     *
+     * @param \Stampi\AdminBundle\Entity\Rarity $rarity
+     * @return Item
+     */
+    public function setRarity(\Stampi\AdminBundle\Entity\Rarity $rarity = null)
+    {
+        $this->rarity = $rarity;
+
+        return $this;
+    }
+
+    /**
+     * Get rarity
+     *
+     * @return \Stampi\AdminBundle\Entity\Rarity 
+     */
+    public function getRarity()
+    {
+        return $this->rarity;
     }
 }

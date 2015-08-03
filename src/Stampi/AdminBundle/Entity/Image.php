@@ -29,7 +29,7 @@ class Image
 
     /**
      * @ORM\ManyToOne(targetEntity="Item")
-     * @ORM\JoinColumn(name="original_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="original_id", referencedColumnName="id", nullable=true)
      */
     private $original;
 

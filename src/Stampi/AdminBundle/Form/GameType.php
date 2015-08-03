@@ -19,8 +19,9 @@ class GameType extends AbstractType
                 'attr' => array('class' => 'datepicker')
                 )
             )
-            ->add('imageFolder', 'hidden', array(
-                'required' => false
+            ->add('logoImage','entity',array(
+                'class' => 'Stampi\AdminBundle\Entity\Image',
+                'attr' => array('class' => 'hidden')
             ))
             ->add('gameI18n', 'collection', array(
                     'type' => new GameI18nType(),

@@ -4,6 +4,7 @@ namespace Stampi\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Edition
  *
@@ -36,10 +37,13 @@ class Edition
     private $symbol;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextI18n", mappedBy="edition", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="edition_id", referencedColumnName="id")
-     */
-    private $editionI18n;
+     * @ORM\ManyToMany(targetEntity="TextI18n", cascade={"persist","remove"})
+     * @ORM\JoinTable(name="editions_texts",
+     *      joinColumns={@ORM\JoinColumn(name="edition_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="text_id", referencedColumnName="id", unique=true)}
+     *      )
+     **/
+    private $textI18n;
 
     /**
      * @ORM\OneToMany(targetEntity="Item", mappedBy="edition", cascade={"persist","remove"})
@@ -108,41 +112,41 @@ class Edition
      */
     public function __construct()
     {
-        $this->editionI18n = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->textI18n = new \Doctrine\Common\Collections\ArrayCollection();
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add editionI18n
+     * Add textI18n
      *
-     * @param \Stampi\AdminBundle\Entity\TextI18n $editionI18n
+     * @param \Stampi\AdminBundle\Entity\TextI18n $textI18n
      * @return Edition
      */
-    public function addEditionI18n(\Stampi\AdminBundle\Entity\TextI18n $editionI18n)
+    public function addTextI18n(\Stampi\AdminBundle\Entity\TextI18n $textI18n)
     {
-        $this->editionI18n[] = $editionI18n;
+        $this->textI18n[] = $textI18n;
 
         return $this;
     }
 
     /**
-     * Remove editionI18n
+     * Remove textI18n
      *
-     * @param \Stampi\AdminBundle\Entity\TextI18n $editionI18n
+     * @param \Stampi\AdminBundle\Entity\TextI18n $textI18n
      */
-    public function removeEditionI18n(\Stampi\AdminBundle\Entity\TextI18n $editionI18n)
+    public function removeTextI18n(\Stampi\AdminBundle\Entity\TextI18n $textI18n)
     {
-        $this->editionI18n->removeElement($editionI18n);
+        $this->textI18n->removeElement($textI18n);
     }
 
     /**
-     * Get editionI18n
+     * Get textI18n
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getEditionI18n()
+    public function getTextI18n()
     {
-        return $this->editionI18n;
+        return $this->textI18n;
     }
 
     /**
