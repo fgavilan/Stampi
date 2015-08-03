@@ -89,4 +89,5 @@ class Image
     {
         return $this->original;
     }
+
 }

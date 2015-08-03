@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th>LogoImage</th>
-                <td>{{ entity.logoImage }}</td>
+                <td>{% if entity.logoImage.id is defined %}{{ entity.logoImage.id }}{% endif %}</td>
             </tr>
         </tbody>
     </table>

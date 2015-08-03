@@ -51,6 +51,13 @@ class Edition
      */
     private $items;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="editions")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     */
+    private $game;
+
+
 
     /**
      * Get id
@@ -180,5 +187,28 @@ class Edition
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set game
+     *
+     * @param \Stampi\AdminBundle\Entity\Game $game
+     * @return Edition
+     */
+    public function setGame(\Stampi\AdminBundle\Entity\Game $game = null)
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return \Stampi\AdminBundle\Entity\Game 
+     */
+    public function getGame()
+    {
+        return $this->game;
     }
 }

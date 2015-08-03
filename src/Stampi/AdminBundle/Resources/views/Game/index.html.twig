@@ -28,7 +28,7 @@
                                 <td><a href="{{ path('game_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                                 <td><a href="{{ path('game_show', { 'id': entity.id }) }}">{{ entity.gameI18n.first.name }}</a></td>
                                 <td>{% if entity.publishDate %}{{ entity.publishDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                <td>{{ entity.imageFolder }}</td>
+                                <td>{{ entity.logoImage }}</td>
                                 <td>
                                     <a href="{{ path('game_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> </a>
                                     <a href="{{ path('game_edit', { 'id': entity.id }) }}"><i class="fa fa-edit"></i></a>

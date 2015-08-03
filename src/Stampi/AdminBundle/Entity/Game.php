@@ -31,8 +31,11 @@ class Game
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="Image", cascade={"persist","remove"} , mappedBy="game", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="logo_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="Image", cascade={"persist","remove"})
+     * @ORM\JoinTable(name="games_images",
+     *      joinColumns={@ORM\JoinColumn(name="game_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $logoImage;
 
@@ -96,15 +99,6 @@ class Game
         return $this;
     }
 
-    /**
-     * Get logoImage
-     *
-     * @return string 
-     */
-    public function getlogoImage()
-    {
-        return $this->logoImage;
-    }
     /**
      * Constructor
      */
@@ -178,5 +172,38 @@ class Game
     public function getEditions()
     {
         return $this->editions;
+    }
+
+    /**
+     * Add logoImage
+     *
+     * @param \Stampi\AdminBundle\Entity\Image $logoImage
+     * @return Game
+     */
+    public function addLogoImage(\Stampi\AdminBundle\Entity\Image $logoImage)
+    {
+        $this->logoImage[] = $logoImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove logoImage
+     *
+     * @param \Stampi\AdminBundle\Entity\Image $logoImage
+     */
+    public function removeLogoImage(\Stampi\AdminBundle\Entity\Image $logoImage)
+    {
+        $this->logoImage->removeElement($logoImage);
+    }
+
+    /**
+     * Get logoImage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLogoImage()
+    {
+        return $this->logoImage;
     }
 }
