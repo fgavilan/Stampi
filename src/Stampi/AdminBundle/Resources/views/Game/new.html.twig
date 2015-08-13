@@ -4,16 +4,13 @@
 {% block extra_javascripts %}<script src="{{ asset('js/plugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>{% endblock %}
 {% block body -%}
 
-
-
-
     <div class="portlet portlet-red">
         <div class="portlet-heading">
             <div class="portlet-title">
                 <h4>New Game Data</h4>
             </div>
             <div class="portlet-widgets">
-                <a href="basic-form-elements.html#formControls" data-parent="#accordion" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
+                <a href="#formControls" data-parent="#accordion" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -26,6 +23,7 @@
                             {{ form_widget(form.publishDate) }}
                         </div>
                     </div>
+                    <!--TODO:Image Manager-->
                     <div class="portlet portlet-purple">
                         <div class="portlet-heading">
                             <div class="portlet-title">
